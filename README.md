@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="../coffeeirc/coffeechat.png" alt="CoffeeChat Logo" width="120" height="67.5">
+  <img src="./coffeechat.png" alt="CoffeeChat Logo" width="120" height="67.5">
 </div>
 
 <div align="center">
