@@ -14,7 +14,6 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat&labelColor=444444)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-25-red?style=flat&labelColor=444444&logo=openjdk&logoColor=white)](https://adoptium.net/)
-
 <br>CoffeeChat是一个基于NeoForge的Minecraft聊天增强模组，为玩家提供更专业、更完善的IRC聊天系统体验。<br>-----本项目为其核心部分-----
 </div>
 
@@ -132,6 +131,7 @@ java "-Dfile.encoding=UTF-8" -jar .\coffeeirc-xxx.jar
 本项目采用 **MIT许可证**，详情请参见 [LICENSE](LICENSE) 文件。
 
 ```
+/*
 MIT License
 
 Copyright (c) 2026 Deplayer
@@ -145,6 +145,7 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+*/
 ```
 
 ## 📞 联系方式
