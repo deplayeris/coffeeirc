@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "mod.deplayer.coffeechat.coffeeirc"
-version = "26.d1"
+version = "26.dr1"
 
 repositories {
     mavenCentral()
@@ -14,18 +14,35 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.apache.logging.log4j:log4j-api:2.23.1")
+    implementation("org.apache.logging.log4j:log4j-core:2.23.1")
+    // implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.23.1")
 }
 
 tasks.test {
     useJUnitPlatform()
+    jvmArgs = listOf(
+        "-Dfile.encoding=UTF-8",
+        "-Dsun.stdout.encoding=UTF-8",
+        "-Dsun.stderr.encoding=UTF-8"
+    )
 }
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "mod.deplayer.coffeechat.coffeeirc.Main"
+        attributes["Main-Class"] = "mod.deplayer.coffeechat.coffeeirc.CDTE"
+        attributes["Add-Opens"] = "java.base/java.lang java.base/java.util"
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType<JavaExec> {
+    jvmArgs = listOf(
+        "-Dfile.encoding=UTF-8",
+        "-Dsun.stdout.encoding=UTF-8", 
+        "-Dsun.stderr.encoding=UTF-8"
+    )
 }
 
 tasks.register<Jar>("sourcesJar") {
@@ -39,4 +56,13 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 
 tasks.build {
     dependsOn(tasks.named<Jar>("sourcesJar"))
+}
+
+tasks.register<JavaExec>("run") {
+    dependsOn(tasks.classes)
+    mainClass.set("mod.deplayer.coffeechat.coffeeirc.CDTE")
+    classpath = sourceSets.main.get().runtimeClasspath
+    jvmArgs = listOf(
+        "-Dfile.encoding=UTF-8"
+    )
 }
