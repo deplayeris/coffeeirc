@@ -23,6 +23,7 @@ SOFTWARE.
 
 package mod.deplayer.coffeechat.coffeeirc.client;
 
+import mod.deplayer.coffeechat.coffeeirc.server.SwInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -76,8 +77,25 @@ public class Client {
         
     private HttpClient clientHttp = HttpClient.newHttpClient();
     
-    public Client(int ipProtocol, String ip, int port, String nickname, String username) {
-
+    public Client(int ipProtocol, String ip, int port, String nickname, String username, String DistributionName) {
+        cml.info("---------------------------------------------------------------------------------");
+        cml.info("[核心信息]正在使用的CoffeeIRC核心的软件信息:");
+        cml.info("        版本号: " + mod.deplayer.coffeechat.coffeeirc.client.SwInfo.version);
+        cml.info("        开发状态: " + mod.deplayer.coffeechat.coffeeirc.client.SwInfo.softwareStatus);
+        cml.info("        版本代号: " + mod.deplayer.coffeechat.coffeeirc.client.SwInfo.VerCodename);
+        cml.info("        支持协议: " + mod.deplayer.coffeechat.coffeeirc.client.SwInfo.connection);
+        cml.info("");
+        cml.info("当前运行本核心的发行版: " + DistributionName);
+        cml.info("");
+        cml.info("如果遇到核心问题，请提交至: https://github.com/deplayeris/coffeeirc/issues");
+        cml.info("如在使用基于本核心的发行版(如无忧聊)时出现问题");
+        cml.info("请先检查是否为核心故障(通过查看核心日志)，若非核心问题请联系发行版作者");
+        cml.info("");
+        cml.info("核心问题提交步骤:");
+        cml.info("1. 在GitHub上创建新的Issue");
+        cml.info("2. 详细准确地描述遇到的问题");
+        cml.info("3. 附上出现问题时的核心日志文件");
+        cml.info("---------------------------------------------------------------------------------");
         this.ipProtocol = ipProtocol;
         this.ip = ip;
         this.port = port;
@@ -98,12 +116,8 @@ public class Client {
     /**记录聊天日志所必须要使用的一个Method*/
     private void initializeChatLog() {
         try {
-            File logDir = new File("./ciclog");
-            if (!logDir.exists()) {
-                logDir.mkdirs();
-            }
             currentChatLogDate = LocalDate.now().toString();
-            String logFileName = "./ciclog/chatlog-c-" + currentChatLogDate + ".log";
+            String logFileName = "./ciclogs/chatlog-c-" + currentChatLogDate + ".log";
             FileWriter fileWriter = new FileWriter(logFileName, true);
             chatLogWriter = new PrintWriter(fileWriter, true);
             
@@ -167,7 +181,7 @@ public class Client {
         }
     }
 
-    /**推送处理器类（最核心的客户端子类，定义并实现了客户端登录之后到断联之前所使用的一切的功能服务）*/
+    /**推送处理器类*/
     class PushHandler implements HttpHandler {
         @Override
         /**处理推送消息的处理器*/

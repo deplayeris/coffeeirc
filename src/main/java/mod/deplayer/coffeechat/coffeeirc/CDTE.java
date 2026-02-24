@@ -50,7 +50,7 @@ public class CDTE {
             }
         }
         else if (s.trim().equals("2")) {
-            Client client = new Client(4, "127.0.0.1", 10025, "CIC Test Client", "CDTE");
+            Client client = new Client(4, "127.0.0.1", 10025, "CIC Test Client", "CDTE", "CDTE");
             client.Connect();
             client.sendMessage("Hello World!");
             client.disconnect();
