@@ -81,7 +81,7 @@ chmod +x coffeeirc-版本号.jar
 - 查看 [API文档](2-API_Documentation.md) 了解详细接口
 - 参考 [快速入门指南](1-Quick_Start_Guide.md) 
 - 浏览 [GitHub仓库](https://github.com/deplayeris/coffeeirc) 获取最新更新
-- 你也可以查看由编译器给出的[Javadoc文档](javadoc/)查看直观的文档和更详细一些的底层设计，推荐下载下来查看<br>
+- 你也可以查看由编译器给出的[Javadoc文档](javadoc/)查看直观且涉及底层的文档，推荐下载下来查看<br>
 // 这是一个网页文档，`javadoc/index.html`是首页
 
 ## 技术支持

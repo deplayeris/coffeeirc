@@ -66,3 +66,7 @@ tasks.register<JavaExec>("run") {
         "-Dfile.encoding=UTF-8"
     )
 }
+
+tasks.withType<Javadoc> {
+    options.memberLevel = JavadocMemberLevel.PRIVATE
+}

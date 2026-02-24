@@ -53,8 +53,31 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">目录&nbsp;<input type="text" class="filter-input" disabled placeholder="筛选内容（键入 .）" aria-label="筛选目录" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="重置"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">说明</a></li>
+<li><a href="#nested-class-summary" tabindex="0">嵌套类概要</a></li>
+<li><a href="#field-summary" tabindex="0">字段概要</a></li>
 <li><a href="#constructor-summary" tabindex="0">构造器概要</a></li>
 <li><a href="#method-summary" tabindex="0">方法概要</a></li>
+<li><a href="#field-detail" tabindex="0">字段详细资料</a>
+<ol class="toc-list">
+<li><a href="#cml" tabindex="0">cml</a></li>
+<li><a href="#DistributionName" tabindex="0">DistributionName</a></li>
+<li><a href="#ip" tabindex="0">ip</a></li>
+<li><a href="#port" tabindex="0">port</a></li>
+<li><a href="#ipProtocol" tabindex="0">ipProtocol</a></li>
+<li><a href="#nickname" tabindex="0">nickname</a></li>
+<li><a href="#username" tabindex="0">username</a></li>
+<li><a href="#servername" tabindex="0">servername</a></li>
+<li><a href="#serverdescription" tabindex="0">serverdescription</a></li>
+<li><a href="#clientId" tabindex="0">clientId</a></li>
+<li><a href="#isConnected" tabindex="0">isConnected</a></li>
+<li><a href="#chatLogWriter" tabindex="0">chatLogWriter</a></li>
+<li><a href="#currentChatLogDate" tabindex="0">currentChatLogDate</a></li>
+<li><a href="#chatLogFormatter" tabindex="0">chatLogFormatter</a></li>
+<li><a href="#pushServer" tabindex="0">pushServer</a></li>
+<li><a href="#pushPort" tabindex="0">pushPort</a></li>
+<li><a href="#clientHttp" tabindex="0">clientHttp</a></li>
+</ol>
+</li>
 <li><a href="#constructor-detail" tabindex="0">构造器详细资料</a>
 <ol class="toc-list">
 <li><a href="#%3Cinit%3E(int,java.lang.String,int,java.lang.String,java.lang.String,java.lang.String)" tabindex="0">Client(int, String, int, String, String, String)</a></li>
@@ -62,6 +85,11 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">方法详细资料</a>
 <ol class="toc-list">
+<li><a href="#initializeChatLog()" tabindex="0">initializeChatLog()</a></li>
+<li><a href="#logChatMessage(java.lang.String,java.lang.String)" tabindex="0">logChatMessage(String, String)</a></li>
+<li><a href="#closeChatLog()" tabindex="0">closeChatLog()</a></li>
+<li><a href="#startPushService()" tabindex="0">startPushService()</a></li>
+<li><a href="#stopPushService()" tabindex="0">stopPushService()</a></li>
 <li><a href="#Connect()" tabindex="0">Connect()</a></li>
 <li><a href="#sendMessage(java.lang.String)" tabindex="0">sendMessage(String)</a></li>
 <li><a href="#disconnect()" tabindex="0">disconnect()</a></li>
@@ -87,6 +115,86 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>嵌套类概要</h2>
+<div class="caption"><span>嵌套类</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">修饰符和类型</div>
+<div class="table-header col-second">类</div>
+<div class="table-header col-last">说明</div>
+<div class="col-first even-row-color"><code>(专用程序包) class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="Client.PushHandler.html" class="type-name-link" title="mod.deplayer.coffeechat.coffeeirc.client中的类">Client.PushHandler</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">推送处理器类</div>
+</div>
+</div>
+</section>
+</li>
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>字段概要</h2>
+<div class="caption"><span>字段</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">修饰符和类型</div>
+<div class="table-header col-second">字段</div>
+<div class="table-header col-last">说明</div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/format/DateTimeFormatter.html" title="java.time.format中的类或接口" class="external-link">DateTimeFormatter</a></code></div>
+<div class="col-second even-row-color"><code><a href="#chatLogFormatter" class="member-name-link">chatLogFormatter</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/PrintWriter.html" title="java.io中的类或接口" class="external-link">PrintWriter</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#chatLogWriter" class="member-name-link">chatLogWriter</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.net.http/java/net/http/HttpClient.html" title="java.net.http中的类或接口" class="external-link">HttpClient</a></code></div>
+<div class="col-second even-row-color"><code><a href="#clientHttp" class="member-name-link">clientHttp</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#clientId" class="member-name-link">clientId</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private static final org.apache.logging.log4j.Logger</code></div>
+<div class="col-second even-row-color"><code><a href="#cml" class="member-name-link">cml</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#currentChatLogDate" class="member-name-link">currentChatLogDate</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#DistributionName" class="member-name-link">DistributionName</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ip" class="member-name-link">ip</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private int</code></div>
+<div class="col-second even-row-color"><code><a href="#ipProtocol" class="member-name-link">ipProtocol</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private boolean</code></div>
+<div class="col-second odd-row-color"><code><a href="#isConnected" class="member-name-link">isConnected</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#nickname" class="member-name-link">nickname</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private int</code></div>
+<div class="col-second odd-row-color"><code><a href="#port" class="member-name-link">port</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private int</code></div>
+<div class="col-second even-row-color"><code><a href="#pushPort" class="member-name-link">pushPort</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpServer.html" title="com.sun.net.httpserver中的类或接口" class="external-link">HttpServer</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#pushServer" class="member-name-link">pushServer</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#serverdescription" class="member-name-link">serverdescription</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#servername" class="member-name-link">servername</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#username" class="member-name-link">username</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -116,20 +224,46 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">修饰符和类型</div>
 <div class="table-header col-second">方法</div>
 <div class="table-header col-last">说明</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#Connect()" class="member-name-link">Connect</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#closeChatLog()" class="member-name-link">closeChatLog</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">连接</div>
+<div class="block">在使用完毕之后，必须关闭聊天日志记录</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#disconnect()" class="member-name-link">disconnect</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#Connect()" class="member-name-link">Connect</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">断开连接</div>
+<div class="block">连接</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendMessage(java.lang.String)" class="member-name-link">sendMessage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#disconnect()" class="member-name-link">disconnect</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">断开连接</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initializeChatLog()" class="member-name-link">initializeChatLog</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">记录聊天日志所必须要使用的一个Method</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#logChatMessage(java.lang.String,java.lang.String)" class="member-name-link">logChatMessage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a>&nbsp;username,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">记录聊天消息</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sendMessage(java.lang.String)" class="member-name-link">sendMessage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">发送消息</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#startPushService()" class="member-name-link">startPushService</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">这个推送服务是用来接收服务器广播消息、客户端发送请求到服务端执行动作的，因此，必须启动</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopPushService()" class="member-name-link">stopPushService</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">在使用完毕之后，必须关闭推送服务</div>
 </div>
 </div>
 </div>
@@ -143,6 +277,150 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>字段详细资料</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="cml">
+<h3>cml</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type">org.apache.logging.log4j.Logger</span>&nbsp;<span class="element-name">cml</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="DistributionName">
+<h3>DistributionName</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">DistributionName</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="ip">
+<h3>ip</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">ip</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="port">
+<h3>port</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">port</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="ipProtocol">
+<h3>ipProtocol</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">ipProtocol</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="nickname">
+<h3>nickname</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">nickname</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="username">
+<h3>username</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">username</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="servername">
+<h3>servername</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">servername</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="serverdescription">
+<h3>serverdescription</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">serverdescription</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="clientId">
+<h3>clientId</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">clientId</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isConnected">
+<h3>isConnected</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isConnected</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="chatLogWriter">
+<h3>chatLogWriter</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/PrintWriter.html" title="java.io中的类或接口" class="external-link">PrintWriter</a></span>&nbsp;<span class="element-name">chatLogWriter</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="currentChatLogDate">
+<h3>currentChatLogDate</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a></span>&nbsp;<span class="element-name">currentChatLogDate</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="chatLogFormatter">
+<h3>chatLogFormatter</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/format/DateTimeFormatter.html" title="java.time.format中的类或接口" class="external-link">DateTimeFormatter</a></span>&nbsp;<span class="element-name">chatLogFormatter</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="pushServer">
+<h3>pushServer</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpServer.html" title="com.sun.net.httpserver中的类或接口" class="external-link">HttpServer</a></span>&nbsp;<span class="element-name">pushServer</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="pushPort">
+<h3>pushPort</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">pushPort</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="clientHttp">
+<h3>clientHttp</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.net.http/java/net/http/HttpClient.html" title="java.net.http中的类或接口" class="external-link">HttpClient</a></span>&nbsp;<span class="element-name">clientHttp</span></div>
+</div>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -169,6 +447,57 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>方法详细资料</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="initializeChatLog()">
+<h3>initializeChatLog</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initializeChatLog</span>()</div>
+<div class="block">记录聊天日志所必须要使用的一个Method</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="logChatMessage(java.lang.String,java.lang.String)">
+<h3>logChatMessage</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">logChatMessage</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a>&nbsp;username,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="java.lang中的类或接口" class="external-link">String</a>&nbsp;message)</span></div>
+<div class="block">记录聊天消息</div>
+<dl class="notes">
+<dt>参数:</dt>
+<dd><code>username</code> - 用户名</dd>
+<dd><code>message</code> - 消息</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="closeChatLog()">
+<h3>closeChatLog</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">closeChatLog</span>()</div>
+<div class="block">在使用完毕之后，必须关闭聊天日志记录</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="startPushService()">
+<h3>startPushService</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">startPushService</span>()</div>
+<div class="block">这个推送服务是用来接收服务器广播消息、客户端发送请求到服务端执行动作的，因此，必须启动</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="stopPushService()">
+<h3>stopPushService</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopPushService</span>()</div>
+<div class="block">在使用完毕之后，必须关闭推送服务</div>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="Connect()">
 <h3>Connect</h3>
