@@ -31,6 +31,7 @@ tasks.test {
 tasks.jar {
     manifest {
         //attributes["Main-Class"] = "mod.deplayer.coffeechat.coffeeirc.CDTE"
+        //当你想要开发和测试时，请将上一行的注释符号去掉
         attributes["Add-Opens"] = "java.base/java.lang java.base/java.util"
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
@@ -61,6 +62,7 @@ tasks.build {
 tasks.register<JavaExec>("run") {
     dependsOn(tasks.classes)
     //mainClass.set("mod.deplayer.coffeechat.coffeeirc.CDTE")
+    //当你想要开发和测试时，请将上一行的注释符号去掉
     classpath = sourceSets.main.get().runtimeClasspath
     jvmArgs = listOf(
         "-Dfile.encoding=UTF-8"
