@@ -27,8 +27,8 @@ package mod.deplayer.coffeechat.coffeeirc.client;
 /// CIC核心的软件信息
 public final class SwInfoc {
 
-    public static String version = "v26.dr1 - Client:1";
-    public static String softwareStatus = "Dev Release";
+    public static String version = "v26.dr1.1 - Client:1";
+    public static String softwareStatus = "Dev Release + Bug Fixed";
     public static String VerCodename = "Groulin";
     public static String connection = "HTTP+Websocket";
 };

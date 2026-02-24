@@ -35,7 +35,7 @@ public class CDTE {
     private static final Logger mainlogger = LogManager.getLogger(CDTE.class);
     public static void main(String[] args) {
 
-        mainlogger.info("这里是CIC Default Test Environment(CDTE)，CIC官方默认测试环境发行版");
+        mainlogger.info("这里是CIC Default Test Environment(CDTE)，CIC官方默认测试环境发行版，Version 3");
 
         String s = System.console().readLine("请选择测试环境：1. 服务器 2. 客户端");
 
