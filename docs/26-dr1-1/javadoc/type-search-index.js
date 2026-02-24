@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"mod.deplayer.coffeechat.coffeeirc.client","l":"Client"},{"p":"mod.deplayer.coffeechat.coffeeirc.server","l":"Server"},{"p":"mod.deplayer.coffeechat.coffeeirc.server","l":"SwInfo"},{"p":"mod.deplayer.coffeechat.coffeeirc.client","l":"SwInfoc"},{"l":"所有类和接口","u":"allclasses-index.html","k":"18"}];updateSearchResults();

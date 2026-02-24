@@ -29,7 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-
+/*
 public class CDTE {
 
     private static final Logger mainlogger = LogManager.getLogger(CDTE.class);
@@ -61,3 +61,4 @@ public class CDTE {
 
     };
 };
+ */

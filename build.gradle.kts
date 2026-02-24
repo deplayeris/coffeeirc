@@ -30,7 +30,7 @@ tasks.test {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "mod.deplayer.coffeechat.coffeeirc.CDTE"
+        //attributes["Main-Class"] = "mod.deplayer.coffeechat.coffeeirc.CDTE"
         attributes["Add-Opens"] = "java.base/java.lang java.base/java.util"
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
@@ -60,7 +60,7 @@ tasks.build {
 
 tasks.register<JavaExec>("run") {
     dependsOn(tasks.classes)
-    mainClass.set("mod.deplayer.coffeechat.coffeeirc.CDTE")
+    //mainClass.set("mod.deplayer.coffeechat.coffeeirc.CDTE")
     classpath = sourceSets.main.get().runtimeClasspath
     jvmArgs = listOf(
         "-Dfile.encoding=UTF-8"

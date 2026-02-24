@@ -2,9 +2,9 @@ name: Auto Check, Build and Upload
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ Main-Section.md, master ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ Main-Section.md, master ]
   workflow_dispatch:
 
 jobs:
