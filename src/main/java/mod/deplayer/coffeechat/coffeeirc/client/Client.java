@@ -23,6 +23,7 @@ SOFTWARE.
 
 package mod.deplayer.coffeechat.coffeeirc.client;
 
+import mod.deplayer.coffeechat.coffeeirc.client.SwInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.net.InetSocketAddress;
