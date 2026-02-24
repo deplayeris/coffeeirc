@@ -71,4 +71,8 @@ tasks.register<JavaExec>("run") {
 
 tasks.withType<Javadoc> {
     options.memberLevel = JavadocMemberLevel.PRIVATE
+    if (options is StandardJavadocDocletOptions) {
+        val standardOptions = options as StandardJavadocDocletOptions
+        standardOptions.linkSource()
+    }
 }
