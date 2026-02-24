@@ -23,7 +23,6 @@ SOFTWARE.
 
 package mod.deplayer.coffeechat.coffeeirc.client;
 
-import mod.deplayer.coffeechat.coffeeirc.client.SwInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.net.InetSocketAddress;
@@ -79,10 +78,10 @@ public class Client {
     public Client(int ipProtocol, String ip, int port, String nickname, String username, String DistributionName) {
         cml.info("---------------------------------------------------------------------------------");
         cml.info("[核心信息]正在使用的CoffeeIRC核心的软件信息:");
-        cml.info("        版本号: " + SwInfo.version);
-        cml.info("        开发状态: " + SwInfo.softwareStatus);
-        cml.info("        版本代号: " + SwInfo.VerCodename);
-        cml.info("        支持协议: " + SwInfo.connection);
+        cml.info("        版本号: " + SwInfoc.version);
+        cml.info("        开发状态: " + SwInfoc.softwareStatus);
+        cml.info("        版本代号: " + SwInfoc.VerCodename);
+        cml.info("        支持协议: " + SwInfoc.connection);
         cml.info("");
         cml.info("当前运行本核心的发行版: " + DistributionName);
         cml.info("");
