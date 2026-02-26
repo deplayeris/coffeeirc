@@ -87,47 +87,16 @@ public class Server {
 
     private KeyPair serverRsaKeyPair;
     private SecretKey serverAesKey;
-
-    public Server(int ipProtocol, int port, String serverInstanceName, String serverDescription, String DistributionName){
+    private String customKey = null;
+    
+    public Server(int ipProtocol, int port, String serverInstanceName, String serverDescription, String DistributionName, String customKey){
 
         this.ipProtocol = ipProtocol;
         this.port = port;
         this.serverInstanceName = serverInstanceName;
         this.serverDescription = serverDescription;
         this.DistributionName = DistributionName;
-        sml.info("已创建服务器实例");
-
-    };
-
-    public Server(int ipProtocol, int port, String DistributionName){
-
-        this.ipProtocol = ipProtocol;
-        this.port = port;
-        this.DistributionName = DistributionName;
-        sml.info("已创建服务器实例");
-
-    };
-
-    public Server(int port, String serverInstanceName, String DistributionName){
-
-        this.port = port;
-        this.serverInstanceName = serverInstanceName;
-        this.DistributionName = DistributionName;
-        sml.info("已创建服务器实例");
-
-    };
-
-    public Server(int port,String DistributionName){
-
-        this.port = port;
-        this.DistributionName = DistributionName;
-        sml.info("已创建服务器实例");
-
-    };
-    public Server(String serverInstanceName, String DistributionName){
-
-        this.serverInstanceName = serverInstanceName;
-        this.DistributionName = DistributionName;
+        this.customKey = customKey;
         sml.info("已创建服务器实例");
 
     };
@@ -137,7 +106,7 @@ public class Server {
         sml.info("[服务器初始化] 开始初始化HTTP服务器...");
 
         initializeChatLog();
-        initializeServerEncryption();
+        initializeServerEncryption(customKey);
         
         serverHttp = HttpServer.create(new InetSocketAddress(port), 0);
 
@@ -178,7 +147,7 @@ public class Server {
         sml.info("[服务器就绪] 服务器已完全就绪，正在等待客户端连接...");
     };
 
-    // 常规的记录客户端信息的类，你也可以参考一下，这样管理真的很方便
+    /// 常规的记录客户端信息的类，你也可以参考一下，这样管理真的很方便
     class ClientInfo {
         private String clientId;
         private String username;
@@ -656,12 +625,21 @@ public class Server {
     }
 
     /**初始化服务器加密系统*/
-    private void initializeServerEncryption() {
+    private void initializeServerEncryption(String customKey) {
         try {
             sml.info("[服务器加密初始化] 开始初始化服务器加密系统...");
 
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048, new SecureRandom());
+            if (customKey != null && !customKey.isEmpty()) {
+                // 使用自定义密钥种子
+                SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+                secureRandom.setSeed(customKey.getBytes("UTF-8"));
+                keyGen.initialize(2048, secureRandom);
+                sml.info("[服务器加密初始化] 使用自定义密钥种子初始化加密系统");
+            } else {
+                keyGen.initialize(2048, new SecureRandom());
+                sml.info("[服务器加密初始化] 使用随机密钥初始化加密系统");
+            }
             serverRsaKeyPair = keyGen.generateKeyPair();
 
             KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");

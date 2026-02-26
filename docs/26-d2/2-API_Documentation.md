@@ -10,8 +10,9 @@ CoffeeIRC是一个基于Java的轻量级IRC聊天库，采用HttpServer技术实
 
 #### 构造方法
 ```java
-// 完整参数构造器
+// 完整参数构造器（支持自定义密钥）
 Server(int ipProtocol, int port, String serverInstanceName, String serverDescription, String DistributionName)
+Server(int ipProtocol, int port, String serverInstanceName, String serverDescription, String DistributionName, String customKey)
 
 // 简化构造器
 Server(int ipProtocol, int port, String DistributionName)
@@ -233,9 +234,18 @@ void setEncryptionEnabled(boolean enabled) // 设置加密状态
 
 #### 构造方法
 ```java
+// 基本构造器
 Client(int ipProtocol, String ip, int port, String nickname, String username, String DistributionName)
+
+// 支持自定义密钥的构造器
+Client(int ipProtocol, String ip, int port, String nickname, String username, String DistributionName, String customKey)
 ```
 创建客户端实例并自动初始化相关服务
+
+**自定义密钥参数说明：**
+- `customKey`: 可选参数，用于生成确定性的RSA密钥对
+- 如果提供此参数，将使用该字符串作为种子生成密钥
+- 如果为null或空字符串，则使用随机密钥
 
 **参数说明：**
 - `ipProtocol`: IP协议版本（4或6）
@@ -396,22 +406,29 @@ import mod.deplayer.coffeechat.coffeeirc.client.Client;
 
 public class ClientExample {
     public static void main(String[] args) {
-        // 创建客户端实例（自动启用加密）
+        // 创建客户端实例（使用随机密钥）
         Client client = new Client(4, "localhost", 10025, 
                                  "Alice", "alice_user", "MyClient");
         
+        // 或者使用自定义密钥
+        Client secureClient = new Client(4, "localhost", 10025, 
+                                       "Bob", "bob_user", "MyClient", 
+                                       "my-secret-custom-key-2026");
+        
         // 连接服务器（自动进行加密握手）
         client.Connect();
+        secureClient.Connect();
         
         // 发送消息（自动加密传输）
         client.sendMessage("你好，世界！");
-        client.sendMessage("这是第二条消息");
+        secureClient.sendMessage("这是使用自定义密钥加密的消息");
         
         // 查询在线用户
         client.sendMessage("/users");
         
         // 断开连接
         client.disconnect();
+        secureClient.disconnect();
     }
 }
 ```
@@ -420,34 +437,34 @@ public class ClientExample {
 ```java
 public class MultiClientExample {
     public static void main(String[] args) throws InterruptedException {
-        // 启动服务器（自动启用加密）
-        Server server = new Server(10025, "ChatRoom");
+        // 启动服务器（使用自定义密钥）
+        Server server = new Server(4, 10025, "ChatRoom", "加密聊天室", "MyDistribution", "server-custom-key-2026");
         server.startServer();
         
-        // 创建多个客户端（都自动启用加密）
-        Client alice = new Client(4, "localhost", 10025, "Alice", "alice", "Client1");
-        Client bob = new Client(4, "localhost", 10025, "Bob", "bob", "Client2");
-        Client charlie = new Client(4, "localhost", 10025, "Charlie", "charlie", "Client3");
+        // 创建多个客户端（使用相同的自定义密钥确保兼容性）
+        Client alice = new Client(4, "localhost", 10025, "Alice", "alice", "Client1", "shared-custom-key-2026");
+        Client bob = new Client(4, "localhost", 10025, "Bob", "bob", "Client2", "shared-custom-key-2026");
+        Client charlie = new Client(4, "localhost", 10025, "Charlie", "charlie", "Client3", "shared-custom-key-2026");
         
-        // 客户端连接（各自进行加密握手）
+        // 客户端连接（使用自定义密钥进行加密握手）
         alice.Connect();
         bob.Connect();
         charlie.Connect();
         
         Thread.sleep(1000); // 等待连接建立和加密握手完成
         
-        // 聊天交互（所有消息自动加密）
-        alice.sendMessage("大家好！");
+        // 聊天交互（所有消息使用自定义密钥加密）
+        alice.sendMessage("大家好！我们使用相同的自定义密钥");
         Thread.sleep(500);
         
-        bob.sendMessage("Hello Alice! 这条消息已被加密");
+        bob.sendMessage("Hello Alice! 自定义密钥确保了一致性");
         Thread.sleep(500);
         
-        charlie.sendMessage("我也来了！所有通讯都是加密的");
+        charlie.sendMessage("我也来了！相同的密钥便于密钥管理");
         Thread.sleep(500);
         
         // 服务器广播
-        server.broadcastMessage("欢迎新用户加入聊天室！这条广播也会被加密传输");
+        server.broadcastMessage("欢迎新用户加入聊天室！广播也使用自定义密钥");
         
         Thread.sleep(1000);
         
@@ -468,17 +485,24 @@ public class MultiClientExample {
 CoffeeIRC采用RSA+AES双重加密机制，提供企业级安全通讯：
 
 #### 加密握手流程
-1. **客户端初始化**: 生成RSA密钥对
+1. **客户端初始化**: 生成RSA密钥对（可使用自定义密钥种子）
 2. **连接请求**: 发送客户端公钥到服务器
 3. **服务器响应**: 返回服务器公钥和加密的AES密钥
 4. **密钥解密**: 客户端使用私钥解密AES会话密钥
 5. **加密通讯**: 后续所有消息使用AES加密传输
+
+#### 自定义密钥特性
+- **确定性生成**: 相同的自定义密钥会产生相同的RSA密钥对
+- **便于管理**: 可以预先配置和分发密钥
+- **兼容性**: 使用相同自定义密钥的客户端可以互相通讯
+- **灵活性**: 既支持随机密钥也支持自定义密钥
 
 #### 安全特性
 - **RSA 2048位**: 用于密钥交换，确保前向安全性
 - **AES 256位**: 用于消息加密，提供高性能加密
 - **自动密钥管理**: 无需手动配置证书
 - **透明加密**: 应用层无需关心加密细节
+- **自定义密钥支持**: 可选的确定性密钥生成机制
 
 ### 技术架构
 

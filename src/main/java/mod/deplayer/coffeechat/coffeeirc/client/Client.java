@@ -87,10 +87,15 @@ public class Client {
     private SecretKey aesKey;
     private PublicKey serverPublicKey;
     private boolean encryptionEnabled = false;
+    private String customKey = null;
         
     private HttpClient clientHttp = HttpClient.newHttpClient();
     
     public Client(int ipProtocol, String ip, int port, String nickname, String username, String DistributionName) {
+        this(ipProtocol, ip, port, nickname, username, DistributionName, null);
+    }
+    
+    public Client(int ipProtocol, String ip, int port, String nickname, String username, String DistributionName, String customKey) {
         cml.info("---------------------------------------------------------------------------------");
         cml.info("[核心信息]正在使用的CoffeeIRC核心的软件信息:");
         cml.info("        版本号: " + SwInfoc.version);
@@ -114,6 +119,7 @@ public class Client {
         this.port = port;
         this.nickname = nickname;
         this.username = username;
+        this.customKey = customKey;
         cml.info("[客户端初始化] 开始创建客户端实例");
         cml.info("[配置详情] IP协议版本: IPv" + ipProtocol);
         cml.info("[配置详情] 服务器地址: " + ip + ":" + port);
@@ -125,7 +131,7 @@ public class Client {
 
         startPushService();
 
-        initializeEncryption();
+        initializeEncryption(customKey);
 
     }
     /**记录聊天日志所必须要使用的一个Method*/
@@ -166,12 +172,21 @@ public class Client {
     }
 
     /**初始化加密系统*/
-    private void initializeEncryption() {
+    private void initializeEncryption(String customKey) {
         try {
             cml.info("[加密初始化] 开始初始化加密通讯系统...");
 
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048, new SecureRandom());
+            if (customKey != null && !customKey.isEmpty()) {
+                // 使用自定义密钥种子
+                SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+                secureRandom.setSeed(customKey.getBytes("UTF-8"));
+                keyGen.initialize(2048, secureRandom);
+                cml.info("[加密初始化] 使用自定义密钥种子初始化加密系统");
+            } else {
+                keyGen.initialize(2048, new SecureRandom());
+                cml.info("[加密初始化] 使用随机密钥初始化加密系统");
+            }
             rsaKeyPair = keyGen.generateKeyPair();
             
             cml.info("[加密初始化] RSA密钥对生成成功");
