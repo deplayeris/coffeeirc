@@ -47,6 +47,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+import java.security.SecureRandom;
 
 /**CIC服务器核心*/
 public class Server {
@@ -74,6 +84,9 @@ public class Server {
 
     private PrintWriter chatLogWriter;
     private String currentChatLogDate;
+
+    private KeyPair serverRsaKeyPair;
+    private SecretKey serverAesKey;
 
     public Server(int ipProtocol, int port, String serverInstanceName, String serverDescription, String DistributionName){
 
@@ -124,6 +137,7 @@ public class Server {
         sml.info("[服务器初始化] 开始初始化HTTP服务器...");
 
         initializeChatLog();
+        initializeServerEncryption();
         
         serverHttp = HttpServer.create(new InetSocketAddress(port), 0);
 
@@ -172,6 +186,10 @@ public class Server {
         private LocalDateTime connectTime;
         private LocalDateTime lastActivityTime;
 
+        private PublicKey clientPublicKey;
+        private SecretKey aesKey;
+        private boolean encryptionEnabled;
+
         public ClientInfo(String clientId, String username, String ipAddress) {
             this.clientId = clientId;
             this.username = username;
@@ -194,6 +212,14 @@ public class Server {
         public String getFormattedLastActivityTime() {
             return lastActivityTime.format(timeFormatter);
         }
+        
+
+        public PublicKey getClientPublicKey() { return clientPublicKey; }
+        public void setClientPublicKey(PublicKey key) { this.clientPublicKey = key; }
+        public SecretKey getAesKey() { return aesKey; }
+        public void setAesKey(SecretKey key) { this.aesKey = key; }
+        public boolean isEncryptionEnabled() { return encryptionEnabled; }
+        public void setEncryptionEnabled(boolean enabled) { this.encryptionEnabled = enabled; }
     }
 
     /// 连接处理器类
@@ -211,11 +237,21 @@ public class Server {
                     inputStream.close();
 
                     String username = "未知用户";
+                    String clientPublicKeyStr = null;
+
                     if (requestBody.contains("\"username\":\"")) {
                         int start = requestBody.indexOf("\"username\":\"") + 12;
                         int end = requestBody.indexOf("\"", start);
                         if (end > start) {
                             username = requestBody.substring(start, end);
+                        }
+                    }
+                    
+                    if (requestBody.contains("\"publicKey\":\"")) {
+                        int start = requestBody.indexOf("\"publicKey\":\"") + 13;
+                        int end = requestBody.indexOf("\"", start);
+                        if (end > start) {
+                            clientPublicKeyStr = requestBody.substring(start, end);
                         }
                     }
 
@@ -227,10 +263,52 @@ public class Server {
                     sml.info("[连接请求处理] 处理来自用户 '" + username + "' 的连接请求");
                     sml.info("[客户端识别] 分配客户端ID: " + clientId);
                     sml.info("[网络信息] 客户端IP地址: " + clientIp);
+
+                    String serverPublicKeyStr = null;
+                    String encryptedAesKeyStr = null;
+                    boolean encryptionSuccess = false;
+                    
+                    if (clientPublicKeyStr != null) {
+                        try {
+                            byte[] clientPubKeyBytes = Base64.getDecoder().decode(clientPublicKeyStr);
+
+                            encryptedAesKeyStr = encryptAesKey(null);
+                            if (encryptedAesKeyStr != null) {
+
+                                clientInfo.setAesKey(serverAesKey);
+                                clientInfo.setEncryptionEnabled(true);
+                                encryptionSuccess = true;
+                                
+                                sml.info("[加密握手] 与客户端 '" + username + "' 的加密握手成功");
+                            }
+                        } catch (Exception e) {
+                            sml.warn("[加密握手失败] 与客户端 '" + username + "' 的加密握手失败: " + e.getMessage());
+                        }
+                    }
+                    
+
+                    serverPublicKeyStr = Base64.getEncoder().encodeToString(serverRsaKeyPair.getPublic().getEncoded());
+
                     sml.info("[连接建立] 用户 '" + username + "' (ID: " + clientId + ") 成功连接到服务器");
                     sml.info("[时间戳记] 连接建立时间: " + clientInfo.getFormattedConnectTime());
                     sml.info("[统计信息] 当前在线用户总数: " + connectedClients.size());
-                    String response = "{\"status\":\"success\",\"message\":\"连接成功\",\"clientId\":\"" + clientId + "\"}";
+                    sml.info("[加密状态] 加密通讯: " + (encryptionSuccess ? "已启用" : "未启用"));
+
+                    StringBuilder responseBuilder = new StringBuilder();
+                    responseBuilder.append("{\"status\":\"success\",\"message\":\"连接成功\",\"clientId\":\"")
+                                  .append(clientId).append("\"");
+                    
+                    if (serverPublicKeyStr != null) {
+                        responseBuilder.append(",\"serverPublicKey\":\"").append(serverPublicKeyStr).append("\"");
+                    }
+                    
+                    if (encryptedAesKeyStr != null) {
+                        responseBuilder.append(",\"encryptedAesKey\":\"").append(encryptedAesKeyStr).append("\"");
+                    }
+                    
+                    responseBuilder.append("}");
+                    String response = responseBuilder.toString();
+                    
                     exchange.getResponseHeaders().set("Content-Type", "application/json");
                     exchange.sendResponseHeaders(200, response.getBytes().length);
                     OutputStream os = exchange.getResponseBody();
@@ -267,6 +345,7 @@ public class Server {
                     String requestBody = new String(inputStream.readAllBytes());
                     inputStream.close();
 
+                    String encryptedMessage = "无内容";
                     String message = "无内容";
                     String clientId = "unknown";
                     String username = "未知用户";
@@ -275,7 +354,7 @@ public class Server {
                         int start = requestBody.indexOf("\"message\":\"") + 11;
                         int end = requestBody.indexOf("\"", start);
                         if (end > start) {
-                            message = requestBody.substring(start, end);
+                            encryptedMessage = requestBody.substring(start, end);
                         }
                     }
 
@@ -291,6 +370,10 @@ public class Server {
                     if (clientInfo != null) {
                         username = clientInfo.getUsername();
                         clientInfo.updateActivityTime();
+
+                        message = decryptClientMessage(encryptedMessage, clientInfo);
+                    } else {
+                        message = encryptedMessage;
                     }
 
                     String timestamp = LocalDateTime.now().format(timeFormatter);
@@ -572,6 +655,58 @@ public class Server {
         }
     }
 
+    /**初始化服务器加密系统*/
+    private void initializeServerEncryption() {
+        try {
+            sml.info("[服务器加密初始化] 开始初始化服务器加密系统...");
+
+            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(2048, new SecureRandom());
+            serverRsaKeyPair = keyGen.generateKeyPair();
+
+            KeyGenerator aesKeyGen = KeyGenerator.getInstance("AES");
+            aesKeyGen.init(256);
+            serverAesKey = aesKeyGen.generateKey();
+            
+            sml.info("[服务器加密初始化] 服务器密钥对和AES密钥生成成功");
+            
+        } catch (Exception e) {
+            sml.error("[服务器加密错误] 初始化加密系统失败: " + e.getMessage());
+        }
+    }
+    
+    /**加密AES密钥*/
+    private String encryptAesKey(PublicKey clientPublicKey) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE, clientPublicKey);
+            byte[] encryptedKey = cipher.doFinal(serverAesKey.getEncoded());
+            return Base64.getEncoder().encodeToString(encryptedKey);
+        } catch (Exception e) {
+            sml.error("[密钥加密错误] AES密钥加密失败: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    /**解密客户端消息*/
+    private String decryptClientMessage(String encryptedMessage, ClientInfo clientInfo) {
+        try {
+            if (!clientInfo.isEncryptionEnabled() || clientInfo.getAesKey() == null) {
+                return encryptedMessage; // 这里未加密直接返回
+            }
+            
+            byte[] decodedBytes = Base64.getDecoder().decode(encryptedMessage);
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, clientInfo.getAesKey());
+            byte[] decryptedBytes = cipher.doFinal(decodedBytes);
+            return new String(decryptedBytes, "UTF-8");
+            
+        } catch (Exception e) {
+            sml.error("[消息解密错误] 客户端消息解密失败: " + e.getMessage());
+            return encryptedMessage; // 解密失败也是返回原文
+        }
+    }
+    
     /**在使用完毕之后，必须关闭聊天日志记录*/
     private void closeChatLog() {
         if (chatLogWriter != null) {

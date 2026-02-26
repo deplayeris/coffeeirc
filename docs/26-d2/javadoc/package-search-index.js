@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"mod.deplayer.coffeechat.coffeeirc.client"},{"l":"mod.deplayer.coffeechat.coffeeirc.server"},{"l":"所有程序包","u":"allpackages-index.html","k":"18"}];updateSearchResults();

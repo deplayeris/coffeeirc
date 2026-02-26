@@ -38,6 +38,16 @@ import java.time.LocalDate;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+import java.security.SecureRandom;
 
 /**CIC客户端核心*/
 public class Client {
@@ -72,6 +82,11 @@ public class Client {
 
     private HttpServer pushServer;
     private int pushPort = 10026;
+
+    private KeyPair rsaKeyPair;
+    private SecretKey aesKey;
+    private PublicKey serverPublicKey;
+    private boolean encryptionEnabled = false;
         
     private HttpClient clientHttp = HttpClient.newHttpClient();
     
@@ -109,6 +124,8 @@ public class Client {
         initializeChatLog();
 
         startPushService();
+
+        initializeEncryption();
 
     }
     /**记录聊天日志所必须要使用的一个Method*/
@@ -148,6 +165,75 @@ public class Client {
         }
     }
 
+    /**初始化加密系统*/
+    private void initializeEncryption() {
+        try {
+            cml.info("[加密初始化] 开始初始化加密通讯系统...");
+
+            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(2048, new SecureRandom());
+            rsaKeyPair = keyGen.generateKeyPair();
+            
+            cml.info("[加密初始化] RSA密钥对生成成功");
+            
+        } catch (Exception e) {
+            cml.error("[加密错误] 初始化加密系统失败: " + e.getMessage());
+        }
+    }
+    
+    /**AES加密消息*/
+    private String encryptMessage(String message) {
+        try {
+            if (!encryptionEnabled || aesKey == null) {
+                return message;
+            }
+            
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+            byte[] encryptedBytes = cipher.doFinal(message.getBytes("UTF-8"));
+            return Base64.getEncoder().encodeToString(encryptedBytes);
+            
+        } catch (Exception e) {
+            cml.error("[加密错误] 消息加密失败: " + e.getMessage());
+            return message;//如果加密失败，就直接返回原文我不管了
+        }
+    }
+    
+    /**解密AES密钥*/
+    private void decryptAesKey(String encryptedAesKeyStr) {
+        try {
+            byte[] encryptedKeyBytes = Base64.getDecoder().decode(encryptedAesKeyStr);
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.DECRYPT_MODE, rsaKeyPair.getPrivate());
+            byte[] decryptedKeyBytes = cipher.doFinal(encryptedKeyBytes);
+            
+            aesKey = new SecretKeySpec(decryptedKeyBytes, "AES");
+            cml.info("[密钥交换] AES密钥解密成功");
+            
+        } catch (Exception e) {
+            cml.error("[密钥交换错误] AES密钥解密失败: " + e.getMessage());
+        }
+    }
+    
+    /**AES解密消息*/
+    private String decryptMessage(String encryptedMessage) {
+        try {
+            if (!encryptionEnabled || aesKey == null) {
+                return encryptedMessage;
+            }
+            
+            byte[] decodedBytes = Base64.getDecoder().decode(encryptedMessage);
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, aesKey);
+            byte[] decryptedBytes = cipher.doFinal(decodedBytes);
+            return new String(decryptedBytes, "UTF-8");
+            
+        } catch (Exception e) {
+            cml.error("[解密错误] 消息解密失败: " + e.getMessage());
+            return encryptedMessage;
+        }
+    }
+    
     /**在使用完毕之后，必须关闭聊天日志记录*/
     private void closeChatLog() {
         if (chatLogWriter != null) {
@@ -222,32 +308,52 @@ public class Client {
         
         try {
             String serverUrl = "http://" + ip + ":" + port;
+
+            String publicKeyStr = Base64.getEncoder().encodeToString(rsaKeyPair.getPublic().getEncoded());
+            String connectRequest = "{\"nickname\":\"" + nickname + "\",\"username\":\"" + username + "\",\"publicKey\":\"" + publicKeyStr + "\"}";
+            
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(serverUrl + "/connect"))
                     .timeout(Duration.ofSeconds(30))
                     .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(
-                            "{\"nickname\":\"" + nickname + "\",\"username\":\"" + username + "\"}"))
+                    .POST(HttpRequest.BodyPublishers.ofString(connectRequest))
                     .build();
             
             HttpResponse<String> response = clientHttp.send(request, 
                     HttpResponse.BodyHandlers.ofString());
             
             if (response.statusCode() == 200) {
-
                 String responseBody = response.body();
+
                 if (responseBody.contains("\"clientId\":\"")) {
                     int start = responseBody.indexOf("\"clientId\":\"") + 12;
                     int end = responseBody.indexOf("\"", start);
                     if (end > start) {
                         clientId = responseBody.substring(start, end);
-                        isConnected = true;
-                        cml.info("[连接成功] 已连接到服务器，客户端ID: " + clientId);
                     }
-                } else {
-                    cml.warn("[警告] 服务器未返回客户端ID");
-                    isConnected = true;
                 }
+                
+
+                if (responseBody.contains("\"serverPublicKey\":\"")) {
+                    // 这里只是一个简化处理，在实际生产环境开发中，额你应该解析服务器公钥
+                    // 更好的意见的话，希望你可以给我提供，因为我在加密开发商真的不擅长 -- by Deplayer515
+                    cml.info("[加密握手] 已接收服务器公钥");
+                }
+                
+                if (responseBody.contains("\"encryptedAesKey\":\"")) {
+                    int start = responseBody.indexOf("\"encryptedAesKey\":\"") + 19;
+                    int end = responseBody.indexOf("\"", start);
+                    if (end > start) {
+                        String encryptedAesKeyStr = responseBody.substring(start, end);
+                        decryptAesKey(encryptedAesKeyStr);
+                    }
+                }
+                
+                isConnected = true;
+                encryptionEnabled = (aesKey != null);
+                cml.info("[连接成功] 已连接到服务器，客户端ID: " + clientId);
+                cml.info("[加密状态] 加密通讯: " + (encryptionEnabled ? "已启用" : "未启用"));
+                
             } else {
                 cml.error("[连接失败] 状态码: " + response.statusCode() + ", 响应: " + response.body());
             }
@@ -267,15 +373,15 @@ public class Client {
             cml.warn("[发送失败] 客户端未连接");
             return;
         }
-        
-        cml.info("[发送] '" + nickname + "' 发送消息: " + message);
-        
 
+        String encryptedMessage = encryptMessage(message);
+        cml.info("[发送] '" + nickname + "' 发送消息: " + (encryptionEnabled ? "[已加密]" : "") + message);
+        
         logChatMessage(nickname, message);
         
         try {
             String serverUrl = "http://" + ip + ":" + port;
-            String requestBody = "{\"nickname\":\"" + nickname + "\",\"message\":\"" + message + "\"";
+            String requestBody = "{\"nickname\":\"" + nickname + "\",\"message\":\"" + encryptedMessage + "\"";
             
 
             if (clientId != null && !clientId.isEmpty()) {
