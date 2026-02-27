@@ -27,9 +27,9 @@ package mod.deplayer.coffeechat.coffeeirc.client;
 /// CIC核心的软件信息
 public final class SwInfoc {
 
-    public static String version = "v26.dr1.1 - Client:2";
+    public static String version = "v26.dr2 - Client:2";
     public static String softwareStatus = "Dev";
-    public static String VerCodename = "Groulin";
-    public static String connection = "HTTP+Websocket";
+    public static String VerCodename = "Sekrata";
+    public static String connection = "HTTPS+Websocket";
 };
 // 其实更好的叫法就是内核，但是由于核心用的过早，并且过于广泛了改不过来了

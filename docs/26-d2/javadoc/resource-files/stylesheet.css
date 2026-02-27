@@ -17,81 +17,115 @@
  */
 :root {
     /* body, block and code fonts */
-    --body-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
-    --block-font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
-    --code-font-family: 'DejaVu Sans Mono', monospace;
+    --body-font-family: 'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --block-font-family: 'DejaVu Serif', Georgia, 'Times New Roman', Times, serif;
+    --code-font-family: 'DejaVu Sans Mono', 'Fira Code', 'JetBrains Mono', Consolas, Monaco, monospace;
+    
     /* Base font sizes for body and code elements */
-    --body-font-size: 14.2px;
-    --block-font-size: 14.4px;
-    --code-font-size: 14px;
-    --nav-font-size: 13.4px;
+    --body-font-size: 15px;
+    --block-font-size: 15.5px;
+    --code-font-size: 14.5px;
+    --nav-font-size: 14px;
+    
     /* Line height for continuous text blocks */
-    --block-line-height: 1.5;
-    --code-line-height: 1.6;
+    --block-line-height: 1.6;
+    --code-line-height: 1.7;
+    
     /* Text colors for body and block elements */
-    --body-text-color: #181818;
-    --block-text-color: #181818;
+    --body-text-color: #2d3748;
+    --block-text-color: #2d3748;
+    
     /* Background colors for various elements */
     --body-background-color: #ffffff;
-    --section-background-color: var(--body-background-color);
+    --section-background-color: #fafafa;
     --detail-background-color: #ffffff;
-    --code-background-color: #f5f5f5;
-    --mark-background-color: #f7f7f7;
-    --detail-block-color: #f4f4f4;
+    --code-background-color: #f8f9fa;
+    --mark-background-color: #e6f7ff;
+    --detail-block-color: #f8f9fa;
+    
     /* Colors for navigation bar and table captions */
-    --navbar-background-color: #4D7A97;
+    --navbar-background-color: #007acc;
     --navbar-text-color: #ffffff;
+    
     /* Background color for subnavigation and various headers */
-    --subnav-background-color: #dee3e9;
-    --subnav-link-color: #47688a;
-    --member-heading-background-color: var(--subnav-background-color);
+    --subnav-background-color: #e6f7ff;
+    --subnav-link-color: #005a9e;
+    --member-heading-background-color: #f0f9ff;
+    
     /* Background and text colors for selected tabs and navigation items */
-    --selected-background-color: #f8981d;
-    --selected-text-color: #253441;
-    --selected-link-color: #4a698a;
+    --selected-background-color: #007acc;
+    --selected-text-color: #ffffff;
+    --selected-link-color: #005a9e;
+    
     /* Background colors for generated tables */
-    --table-header-color: #ebeff4;
+    --table-header-color: #e6f7ff;
     --even-row-color: #ffffff;
-    --odd-row-color: #f0f0f2;
+    --odd-row-color: #f8fbfd;
+    
     /* Text color for page title */
-    --title-color: #2c4557;
+    --title-color: #1a202c;
+    
     /* Text colors for links */
-    --link-color: #437291;
-    --link-color-active: #bb7a2a;
+    --link-color: #007acc;
+    --link-color-active: #005a9e;
+    
     /* Table of contents */
-    --toc-background-color: #f8f8f8;
-    --toc-highlight-color: var(--subnav-background-color);
-    --toc-hover-color: #e9ecf0;
+    --toc-background-color: #f8fbfd;
+    --toc-highlight-color: #cceeff;
+    --toc-hover-color: #e6f7ff;
+    
     /* Snippet and pre colors */
-    --snippet-background-color: #f2f2f4;
-    --snippet-text-color: var(--block-text-color);
-    --snippet-highlight-color: #f7c590;
-    --pre-background-color: var(--snippet-background-color);
-    --pre-text-color: var(--snippet-text-color);
+    --snippet-background-color: #f8fbfd;
+    --snippet-text-color: #2d3748;
+    --snippet-highlight-color: #cceeff;
+    --pre-background-color: #f8fbfd;
+    --pre-text-color: #2d3748;
+    
     /* Border colors for structural elements and user defined tables */
-    --border-color: #e6e6e6;
-    --table-border-color: #000000;
+    --border-color: #cceeff;
+    --table-border-color: #99ddff;
+    
     /* Styles for table tabs */
-    --tab-border-radius: 2px 2px 0 0;
+    --tab-border-radius: 8px 8px 0 0;
+    
     /* Search input colors */
     --search-input-background-color: #ffffff;
-    --search-input-text-color: #000000;
-    --search-input-placeholder-color: #909090;
+    --search-input-text-color: #2d3748;
+    --search-input-placeholder-color: #90a4ae;
+    
     /* Highlight color for active search tag target */
-    --search-tag-highlight-color: #ffff66;
+    --search-tag-highlight-color: #cceeff;
+    
     /* Copy button colors and filters */
-    --button-border-color: #b0b8c8;
-    --button-active-filter: brightness(96%);
-    --button-focus-filter: brightness(104%);
+    --button-border-color: #99ddff;
+    --button-active-filter: brightness(95%);
+    --button-focus-filter: brightness(105%);
+    
     /* Colors for invalid tag notifications */
-    --invalid-tag-background-color: #ffe6e6;
-    --invalid-tag-text-color: #000000;
+    --invalid-tag-background-color: #ffebee;
+    --invalid-tag-text-color: #c62828;
+    
+    /* Sky blue brand colors */
+    --brand-primary: #007acc;
+    --brand-secondary: #0099cc;
+    --brand-accent: #66ccff;
+    
     /* Navigation bar dimensions */
-    --top-nav-height: 44px;
-    --sub-nav-height: 36px;
+    --top-nav-height: 50px;
+    --sub-nav-height: 40px;
     --nav-height: calc(var(--top-nav-height) + var(--sub-nav-height));
-    --max-content-width: 1500px;
+    --max-content-width: 1400px;
     --content-margin: 0 auto;
+    
+    /* Shadows and effects */
+    --shadow-sm: 0 1px 3px rgba(0, 122, 204, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 122, 204, 0.15);
+    --shadow-lg: 0 10px 25px rgba(0, 122, 204, 0.2);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
 }
 /*
  * Styles for individual HTML elements.
@@ -117,24 +151,50 @@ div.main-grid {
     margin: var(--content-margin);
 }
 a:link, a:visited {
-    text-decoration:none;
-    color:var(--link-color);
+    text-decoration: none;
+    color: var(--link-color);
+    position: relative;
+    transition: all var(--transition-fast);
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+a:link:hover, a:visited:hover {
+    background-color: rgba(0, 122, 204, 0.1);
+    color: var(--link-color-active);
 }
 nav a:link, nav a:visited {
     color: var(--subnav-link-color);
 }
 a[href]:hover, a[href]:active {
-    text-decoration:none;
-    color:var(--link-color-active);
+    text-decoration: none;
+    color: var(--link-color-active);
+    transform: translateY(-1px);
+    border-radius: 4px;
 }
 pre {
-    font-family:var(--code-font-family);
-    font-size:var(--code-font-size);
+    font-family: var(--code-font-family);
+    font-size: var(--code-font-size);
     line-height: var(--code-line-height);
-    background-color: var(--pre-background-color);
+    background: linear-gradient(135deg, var(--pre-background-color), #e6f7ff);
     color: var(--pre-text-color);
-    padding: 10px;
-    overflow-x:auto;
+    padding: 16px;
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 4px rgba(0,122,204,0.05);
+    position: relative;
+}
+
+pre:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary), var(--brand-accent));
+    border-radius: 12px 12px 0 0;
 }
 h1 {
     font-size:1.425em;
@@ -217,13 +277,16 @@ hr {
     margin: var(--content-margin);
 }
 .top-nav {
-    background-color:var(--navbar-background-color);
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
     color:var(--navbar-text-color);
     width:100%;
     height:var(--top-nav-height);
     overflow:visible;
-    font-size:0.857em;
+    font-size:0.9em;
     position:relative;
+    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 12px 12px;
 }
 .top-nav nav.toc {
     display: none;
@@ -250,11 +313,14 @@ ul.nav-list li {
     height: 1.2em;
 }
 div.sub-nav {
-    background-color:var(--subnav-background-color);
+    background: linear-gradient(to right, var(--subnav-background-color), #cceeff);
     width:100%;
     overflow:hidden;
     font-size:var(--nav-font-size);
     height: var(--sub-nav-height);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px;
 }
 ol.sub-nav-list {
     flex: 1 1 90%;
@@ -348,12 +414,21 @@ body.class-use-page h2 {
     margin-top: 20px;
 }
 body.class-declaration-page .details h3 {
-    background-color:var(--member-heading-background-color);
-    border:1px solid var(--border-color);
-    margin:6px 0;
-    padding:7px;
-    overflow-x:auto;
-    font-size: 1.08em;
+    background: linear-gradient(to right, var(--member-heading-background-color), #e6f7ff);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--brand-secondary);
+    margin: 8px 0;
+    padding: 12px 15px;
+    overflow-x: auto;
+    font-size: 1.1em;
+    border-radius: 0 12px 12px 0;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+body.class-declaration-page .details h3:hover {
+    transform: translateX(3px);
+    box-shadow: var(--shadow-md);
 }
 body.class-declaration-page section.detail:target > h3,
 body.class-declaration-page section.detail > h3:target {
@@ -425,7 +500,7 @@ dl.name-value > dd {
  * Styles for table of contents.
  */
 .main-grid nav.toc {
-    background-color: var(--toc-background-color);
+    background: linear-gradient(135deg, var(--toc-background-color), #e6f7ff);
     position: sticky;
     top: calc(var(--nav-height));
     max-height: calc(100vh - var(--nav-height));
@@ -433,6 +508,9 @@ dl.name-value > dd {
     flex-direction: column;
     font-family: var(--body-font-family);
     z-index: 1;
+    border-left: 1px solid var(--border-color);
+    box-shadow: -2px 0 10px rgba(0,122,204,0.1);
+    border-radius: 0 0 0 12px;
 }
 .main-grid nav.toc div.toc-header {
     top: var(--nav-height);
@@ -538,10 +616,19 @@ nav.toc ol.toc-list ol.toc-list ol.toc-list a {
     padding-left: 40px;
 }
 nav.toc a:hover {
-    background-color: var(--toc-hover-color);
+    background: linear-gradient(90deg, var(--toc-hover-color), #cceeff);
+    transform: translateX(3px);
+    border-left: 3px solid var(--brand-secondary);
+    transition: all var(--transition-fast);
+    border-radius: 0 8px 8px 0;
 }
 nav.toc a.current-selection {
-    background-color: var(--toc-highlight-color);
+    background: linear-gradient(90deg, var(--toc-highlight-color), #99ddff);
+    border-left: 4px solid var(--brand-primary);
+    font-weight: 600;
+    color: var(--brand-primary);
+    box-shadow: inset 0 0 10px rgba(0, 122, 204, 0.15);
+    border-radius: 0 8px 8px 0;
 }
 nav.toc a:focus-visible {
     background-color: var(--selected-background-color);
@@ -621,10 +708,17 @@ ul.preview-feature-list input {
  * Styles for tables.
  */
 .summary-table, .details-table {
-    border:1px solid var(--border-color);
-    border-top:0;
-    padding:0;
-    margin-bottom: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+    transition: all var(--transition-normal);
+}
+
+.summary-table:hover, .details-table:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 .caption {
     overflow: auto hidden;
@@ -639,11 +733,21 @@ ul.preview-feature-list input {
     margin: 0;
 }
 .caption span {
-    background-color: var(--navbar-background-color);
-    padding:5px 12px 7px 12px;
-    height:16px;
-    color:var(--navbar-text-color);
-    display:inline-block;
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    padding: 8px 16px;
+    height: auto;
+    color: var(--navbar-text-color);
+    display: inline-block;
+    border-radius: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.caption span:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 .inherited-list h3 {
     background-color: var(--subnav-background-color);
@@ -763,9 +867,14 @@ div.checkboxes > label > input {
     height: 18px;
 }
 .table-header {
-    background: var(--table-header-color);
-    font-weight: bold;
+    background: linear-gradient(135deg, var(--table-header-color), #cceeff);
+    font-weight: 600;
     border-bottom: 1px solid var(--border-color);
+    padding: 12px 15px !important;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 12px 12px 0 0 !important;
 }
 /* Sortable table columns */
 .table-header[onclick] {
@@ -892,15 +1001,36 @@ sup.restricted-mark > a:link {
     font-style:italic;
 }
 .deprecation-block, .preview-block, .restricted-block {
-    font-size:1em;
-    font-family:var(--block-font-family);
-    border-style:solid;
-    border-width:thin;
-    border-radius:6px;
-    padding:10px;
-    margin-bottom:10px;
-    margin-right:10px;
-    display:inline-block;
+    font-size: 1em;
+    font-family: var(--block-font-family);
+    border: 2px solid;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    display: block;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.deprecation-block:hover, .preview-block:hover, .restricted-block:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.deprecation-block {
+    border-color: #ff6b6b;
+    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+}
+
+.preview-block {
+    border-color: var(--brand-primary);
+    background: linear-gradient(135deg, #e6f7ff, #cceeff);
+}
+
+.restricted-block {
+    border-color: #ffa726;
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
 }
 .deprecation-block code, .preview-block code, .restricted-block code {
     font-size: 0.97em;
@@ -1030,17 +1160,25 @@ li.ui-static-link a, li.ui-static-link a:visited {
 }
 input[type="text"] {
     background-image:url('glass.svg');
-    background-size:13px;
+    background-size:16px;
     background-repeat:no-repeat;
-    background-position:3px 4px;
+    background-position:12px center;
     background-color: var(--search-input-background-color);
     color: var(--search-input-text-color);
-    border-color: var(--border-color);
-    border-radius: 4px;
-    padding-left:20px;
-    padding-right: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 30px;
+    padding: 10px 20px 10px 36px;
     font-size: var(--nav-font-size);
-    height: 19px;
+    height: auto;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--brand-secondary);
+    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.15), var(--shadow-md);
+    transform: translateY(-1px);
 }
 input#page-search-input {
     width: calc(180px + 10vw);
@@ -1094,19 +1232,27 @@ input:focus::placeholder {
 select#search-modules {
     margin: 0 10px 10px 2px;
     font-size: var(--nav-font-size);
-    padding: 3px 5px;
-    border-radius: 4px;
-    background: #f0f0f0;
-    border: 1px solid #909090;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, #ffffff, #f8fbfd);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+select#search-modules:hover {
+    border-color: var(--brand-secondary);
+    box-shadow: var(--shadow-md);
 }
 kbd {
-    background-color: #eeeeee;
-    border: 1px solid #b0b0b0;
-    border-radius: 3px;
-    padding: 0 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.6) inset;
+    background: linear-gradient(to bottom, #ffffff, #f8fbfd);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2px 8px;
+    box-shadow: 0 2px 4px rgba(0, 122, 204, 0.1), 0 1px 0 0 rgba(255, 255, 255, 0.8) inset;
     font-size: 0.9em;
     font-weight: bold;
+    color: var(--brand-primary);
 }
 .search-tag-result:target {
     background-color:var(--search-tag-highlight-color);
