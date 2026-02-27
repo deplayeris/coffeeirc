@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=26-d2/javadoc/index.html">
+    <title>Redirecting...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .redirect-message {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .redirect-message a {
+            color: #007acc;
+            text-decoration: none;
+        }
+        .redirect-message a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <h2>正在跳转到 Javadoc 文档...</h2>
+        <p>如果没有自动跳转，请<a href="26-d2/javadoc/index.html">点击这里</a>访问文档。</p>
+    </div>
+    <script>
+        // JavaScript fallback for redirect
+        setTimeout(function() {
+            window.location.href = "javadoc/index.html";
+        }, 100);
+    </script>
+</body>
+</html>
