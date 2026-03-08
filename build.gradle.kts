@@ -1,8 +1,69 @@
 plugins {
     id("java")
+    `java-library`
     `maven-publish`
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
+            groupId = "mod.deplayer.coffeechat"
+            artifactId = "coffeeirc"
+            version = "26.d2"
+
+            pom {
+                name.set("CoffeeIRC")
+                description.set("A IRC chat library/core for Java")
+                url.set("https://github.com/deplayeris/coffeeirc")
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("Deplayer515")
+                        name.set("Deplayer")
+                    }
+                    developer {
+                        id.set("Deplayer")
+                        name.set("Deplayer Team")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:git://github.com/deplayeris/coffeeirc.git")
+                    developerConnection.set("scm:git:ssh://github.com/deplayeris/coffeeirc.git")
+                    url.set("https://github.com/deplayeris/coffeeirc")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/deplayeris/coffeeirc")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME") ?: project.findProperty("gpr.user")?.toString() ?: System.getenv("GITHUB_ACTOR")
+                password = System.getenv("MAVEN_PASSWORD") ?: project.findProperty("gpr.key")?.toString() ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
 group = "mod.deplayer.coffeechat.coffeeirc"
 version = "26.d2"
 
@@ -41,22 +102,17 @@ tasks.jar {
 tasks.withType<JavaExec> {
     jvmArgs = listOf(
         "-Dfile.encoding=UTF-8",
-        "-Dsun.stdout.encoding=UTF-8", 
+        "-Dsun.stdout.encoding=UTF-8",
         "-Dsun.stderr.encoding=UTF-8"
     )
 }
 
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
-
 tasks.withType<AbstractPublishToMaven>().configureEach {
-    dependsOn(tasks.named<Jar>("sourcesJar"))
+    dependsOn(tasks.named("sourcesJar"))
 }
 
 tasks.build {
-    dependsOn(tasks.named<Jar>("sourcesJar"))
+    dependsOn(tasks.named("sourcesJar"))
 }
 
 tasks.register<JavaExec>("run") {
@@ -74,5 +130,8 @@ tasks.withType<Javadoc> {
     if (options is StandardJavadocDocletOptions) {
         val standardOptions = options as StandardJavadocDocletOptions
         standardOptions.linkSource()
+        standardOptions.addStringOption("Xdoclint:none", "-quiet")
+        standardOptions.encoding = "UTF-8"
+        standardOptions.charSet = "UTF-8"
     }
 }
