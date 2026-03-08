@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "mod.deplayer.coffeechat.coffeeirc"
-version = "26.dr2"
+version = "26.d2"
 
 repositories {
     mavenCentral()

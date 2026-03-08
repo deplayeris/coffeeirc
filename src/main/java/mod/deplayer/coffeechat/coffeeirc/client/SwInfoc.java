@@ -27,7 +27,7 @@ package mod.deplayer.coffeechat.coffeeirc.client;
 /// CIC核心的软件信息
 public final class SwInfoc {
 
-    public static String version = "v26.dr2 - Client:2";
+    public static String version = "v26.d2 - Client:2";
     public static String softwareStatus = "Dev";
     public static String VerCodename = "Sekrata";
     public static String connection = "HTTPS+Websocket";
