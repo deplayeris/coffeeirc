@@ -27,7 +27,7 @@ package io.github.deplayeris.coffeeirc.server;
 /// CIC核心的软件信息
 public final class SwInfo{
 
-    public static String version = "v26.d2 - Server:2 ";
+    public static String version = "v26.d2.1 - Server:2 ";
     public static String softwareStatus = "Dev";
     public static String VerCodename = "Sekrata";
     public static String connection = "HTTPS+Websocket";

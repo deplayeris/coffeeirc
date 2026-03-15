@@ -13,7 +13,7 @@ java {
 }
 
 group = "io.github.deplayeris.coffeeirc"
-version = "26.d2"
+version = "26.d2.1"
 
 repositories {
     mavenCentral()

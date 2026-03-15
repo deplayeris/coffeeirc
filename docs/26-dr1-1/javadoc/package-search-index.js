@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"io.github.deplayeris.coffeeirc.client"},{"l":"io.github.deplayeris.coffeeirc.server"},{"l":"所有程序包","u":"allpackages-index.html","k":"18"}];updateSearchResults();
