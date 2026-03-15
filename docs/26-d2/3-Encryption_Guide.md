@@ -68,8 +68,8 @@ RSA长度2048位用于密钥交换，AES 256位（ECB Mode）用于消息传输�
 
 ### 基本加密通讯
 ```java
-import mod.deplayer.coffeechat.coffeeirc.client.Client;
-import mod.deplayer.coffeechat.coffeeirc.server.Server;
+import client.io.github.deplayeris.coffeeirc.Client;
+import server.io.github.deplayeris.coffeeirc.Server;
 
 // 跟正常方式一样，不用过多配置
 

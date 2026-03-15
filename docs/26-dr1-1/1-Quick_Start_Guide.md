@@ -14,7 +14,7 @@ CoffeeIRC是一个轻量级的Java IRC聊天库，提供完整的客户端-服�
 
 ### 1. 服务器端部署
 ```java
-import mod.deplayer.coffeechat.coffeeirc.server.Server;
+import server.io.github.deplayeris.coffeeirc.Server;
 
 public class QuickStartServer {
     public static void main(String[] args) throws Exception {
@@ -32,7 +32,7 @@ public class QuickStartServer {
 
 ### 2. 客户端连接
 ```java
-import mod.deplayer.coffeechat.coffeeirc.client.Client;
+import client.io.github.deplayeris.coffeeirc.Client;
 
 public class QuickStartClient {
     public static void main(String[] args) {

@@ -21,14 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package mod.deplayer.coffeechat.coffeeirc;
+package io.github.deplayeris.coffeeirc;
 
-import mod.deplayer.coffeechat.coffeeirc.client.Client;
-import mod.deplayer.coffeechat.coffeeirc.server.Server;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
 /*
 public class CDTE {
 

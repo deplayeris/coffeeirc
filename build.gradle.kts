@@ -12,59 +12,7 @@ java {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            groupId = "mod.deplayer.coffeechat"
-            artifactId = "coffeeirc"
-            version = "26.d2"
-
-            pom {
-                name.set("CoffeeIRC")
-                description.set("A IRC chat library/core for Java")
-                url.set("https://github.com/deplayeris/coffeeirc")
-
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set("Deplayer515")
-                        name.set("Deplayer")
-                    }
-                    developer {
-                        id.set("Deplayer")
-                        name.set("Deplayer Team")
-                    }
-                }
-
-                scm {
-                    connection.set("scm:git:git://github.com/deplayeris/coffeeirc.git")
-                    developerConnection.set("scm:git:ssh://github.com/deplayeris/coffeeirc.git")
-                    url.set("https://github.com/deplayeris/coffeeirc")
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/deplayeris/coffeeirc")
-            credentials {
-                username = System.getenv("MAVEN_USERNAME") ?: project.findProperty("gpr.user")?.toString() ?: System.getenv("GITHUB_ACTOR")
-                password = System.getenv("MAVEN_PASSWORD") ?: project.findProperty("gpr.key")?.toString() ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}
-group = "mod.deplayer.coffeechat.coffeeirc"
+group = "io.github.deplayeris.coffeeirc"
 version = "26.d2"
 
 repositories {
@@ -91,7 +39,7 @@ tasks.test {
 
 tasks.jar {
     manifest {
-        //attributes["Main-Class"] = "mod.deplayer.coffeechat.coffeeirc.CDTE"
+        //attributes["Main-Class"] = "io.github.deplayeris.coffeeirc.CDTE"
         //当你想要开发和测试时，请将上一行的注释符号去掉
         attributes["Add-Opens"] = "java.base/java.lang java.base/java.util"
     }
@@ -117,7 +65,7 @@ tasks.build {
 
 tasks.register<JavaExec>("run") {
     dependsOn(tasks.classes)
-    //mainClass.set("mod.deplayer.coffeechat.coffeeirc.CDTE")
+    //mainClass.set("io.github.deplayeris.coffeeirc.CDTE")
     //当你想要开发和测试时，请将上一行的注释符号去掉
     classpath = sourceSets.main.get().runtimeClasspath
     jvmArgs = listOf(

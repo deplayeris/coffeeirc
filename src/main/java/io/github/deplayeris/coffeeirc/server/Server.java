@@ -26,14 +26,13 @@ SOFTWARE.
 * */
 
 
-package mod.deplayer.coffeechat.coffeeirc.server;
+package io.github.deplayeris.coffeeirc.server;
 
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.LogManager;
-import mod.deplayer.coffeechat.coffeeirc.server.SwInfo;
 
 import java.io.*;
 import java.net.*;
@@ -49,12 +48,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
 import java.security.PublicKey;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.security.SecureRandom;
 

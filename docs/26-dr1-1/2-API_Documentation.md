@@ -309,7 +309,7 @@ void stopPushService()
 
 ### 服务器端完整示例
 ```java
-import mod.deplayer.coffeechat.coffeeirc.server.Server;
+import server.io.github.deplayeris.coffeeirc.Server;
 
 public class ServerExample {
     public static void main(String[] args) {
@@ -335,7 +335,7 @@ public class ServerExample {
 
 ### 客户端完整示例
 ```java
-import mod.deplayer.coffeechat.coffeeirc.client.Client;
+import client.io.github.deplayeris.coffeeirc.Client;
 
 public class ClientExample {
     public static void main(String[] args) {

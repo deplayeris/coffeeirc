@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package mod.deplayer.coffeechat.coffeeirc.client;
+package io.github.deplayeris.coffeeirc.client;
 
 //TODO:每次发布都必须更改这些硬编码软件信息
 /// CIC核心的软件信息

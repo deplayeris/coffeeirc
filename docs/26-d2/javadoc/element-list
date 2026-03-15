@@ -1,2 +1,2 @@
-mod.deplayer.coffeechat.coffeeirc.client
-mod.deplayer.coffeechat.coffeeirc.server
+io.github.deplayeris.coffeeirc.client
+io.github.deplayeris.coffeeirc.server
